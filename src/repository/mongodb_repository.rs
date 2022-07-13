@@ -4,7 +4,7 @@ use mongodb::{Client, Collection};
 use std::env;
 
 pub struct MongoRepository {
-    posts_collection: Collection<Post>,
+    pub posts_collection: Collection<Post>,
 }
 
 impl MongoRepository {
