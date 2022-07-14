@@ -1,5 +1,4 @@
 use crate::models::post_model::Post;
-use dotenv::dotenv;
 use mongodb::{Client, Collection};
 use std::env;
 
@@ -9,7 +8,6 @@ pub struct MongoRepository {
 
 impl MongoRepository {
     pub async fn init() -> Self {
-        dotenv().ok();
         let uri = match env::var("MONGODB_URI") {
             Ok(value) => value,
             Err(_) => format!(""),
