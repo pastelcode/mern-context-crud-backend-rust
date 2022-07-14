@@ -1,4 +1,5 @@
 use mongodb::bson::oid::ObjectId;
+use rocket::{fs::TempFile, FromForm};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -13,5 +14,12 @@ pub struct Post {
     pub id: Option<ObjectId>,
     pub title: String,
     pub description: String,
-    pub image: Image,
+    pub image: Option<Image>,
+}
+
+#[derive(FromForm)]
+pub struct PostFromForm<'r> {
+    pub title: String,
+    pub description: String,
+    pub image: TempFile<'r>,
 }
