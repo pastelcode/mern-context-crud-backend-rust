@@ -1,5 +1,8 @@
 use crate::{models::post_model::Post, repository::mongodb_repository::MongoRepository};
-use mongodb::bson::{doc, extjson::de::Error, oid::ObjectId};
+use mongodb::{
+    bson::{doc, extjson::de::Error, oid::ObjectId},
+    results::InsertOneResult,
+};
 use rocket::futures::StreamExt;
 
 impl MongoRepository {
@@ -23,6 +26,20 @@ impl MongoRepository {
             .find_one(filter, None)
             .await
             .unwrap()
+            .unwrap();
+        Ok(post)
+    }
+
+    pub async fn create_post(&self, received_post: Post) -> Result<InsertOneResult, Error> {
+        let new_document = Post::new(
+            received_post.title,
+            received_post.description,
+            received_post.image,
+        );
+        let post = self
+            .posts_collection
+            .insert_one(new_document, None)
+            .await
             .unwrap();
         Ok(post)
     }
