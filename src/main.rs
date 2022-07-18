@@ -2,7 +2,7 @@ mod initialize_env_variables;
 mod models;
 mod repository;
 mod routes;
-mod upload_image_to_cloudinary;
+mod services;
 
 use initialize_env_variables::initialize_env_variables;
 use repository::mongodb_repository::MongoRepository;

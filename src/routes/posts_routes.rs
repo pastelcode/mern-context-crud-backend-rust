@@ -7,7 +7,7 @@ use rocket::{
 use crate::{
     models::post_model::{Post, PostFromForm},
     repository::mongodb_repository::MongoRepository,
-    upload_image_to_cloudinary::upload_image_to_cloudinary,
+    services::upload_image_to_cloudinary::upload_image_to_cloudinary,
 };
 
 #[get("/")]
